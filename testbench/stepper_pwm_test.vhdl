@@ -13,16 +13,16 @@ architecture behavior of Stepper_PWM_Test is
 			-- clock
 			i_clk:		in	std_logic;
 			
-			i_prescaler:	in	natural range 0 to 65535;
+			i_prescaler:	in	std_logic_vector(15 downto 0);
 			
 			-- Reset signal
 			i_reset:	in	std_logic;
 			
 			-- match signals
-			i_match_a1:	in	natural range 0 to 1000;
-			i_match_a3:	in	natural range 0 to 1000;
-			i_match_b1:	in	natural range 0 to 1000;
-			i_match_b3:	in	natural range 0 to 1000;
+			i_match_a1:	in	unsigned(9 downto 0);
+			i_match_a3:	in	unsigned(9 downto 0);
+			i_match_b1:	in	unsigned(9 downto 0);
+			i_match_b3:	in	unsigned(9 downto 0);
 			
 			o_a1:		out	std_logic;
 			o_a3:		out	std_logic;
@@ -35,16 +35,16 @@ architecture behavior of Stepper_PWM_Test is
 	
 	-- Declare inputs, and initialize them
 	signal clk:		std_logic			:= '0';
-	signal prescaler:	natural range 0 to 65535	:= 0;
+	signal prescaler:	std_logic_vector(15 downto 0)	:= (others => '0');
 	signal reset:		std_logic			:= '0';
 	signal a1:		std_logic			:= '0';
 	signal a3:		std_logic			:= '0';
 	signal b1:		std_logic			:= '0';
 	signal b3:		std_logic			:= '0';
-	signal match_a1:	natural range 0 to 1000		:= 0;
-	signal match_a3:	natural range 0 to 1000		:= 0;
-	signal match_b1:	natural range 0 to 1000		:= 0;
-	signal match_b3:	natural range 0 to 1000		:= 0;
+	signal match_a1:	std_logic_vector(9 downto 0)	:= (others => '0');
+	signal match_a3:	std_logic_vector(9 downto 0)	:= "1111101000";--0
+	signal match_b1:	std_logic_vector(9 downto 0)	:= "0100000000";
+	signal match_b3:	std_logic_vector(9 downto 0)	:= "0010000000";
 	--signal counter		natural range 0 to 1000		:= 0;
 	
 begin

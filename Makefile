@@ -6,7 +6,7 @@ FILES= src/config.vhdl src/stepper_pwm.vhdl
 
 # Testbench files
 SIMTOP = stepper_pwm_test
-SIMFILES= testbench/stepper_pwm_test.vhdtst
+SIMFILES= testbench/stepper_pwm_test.vhdl
 
 # Simulation break condition
 GHDL_SIM_TIME = 2500ns

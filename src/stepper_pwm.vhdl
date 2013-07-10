@@ -2,24 +2,21 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-use work.config.all;
-
-
 entity Stepper_PWM is
 	port (
 		-- clock
 		i_clk:		in	std_logic;
 		
-		i_prescaler:	in	natural range 0 to 65535;
+		i_prescaler:	in	std_logic_vector(15 downto 0);
 		
 		-- Reset signal
 		i_reset:	in	std_logic;
 		
 		-- match signals
-		i_match_a1:	in	natural range 0 to 1000;
-		i_match_a3:	in	natural range 0 to 1000;
-		i_match_b1:	in	natural range 0 to 1000;
-		i_match_b3:	in	natural range 0 to 1000;
+		i_match_a1:	in	std_logic_vector(9 downto 0);
+		i_match_a3:	in	std_logic_vector(9 downto 0);
+		i_match_b1:	in	std_logic_vector(9 downto 0);
+		i_match_b3:	in	std_logic_vector(9 downto 0);
 		
 		o_a1:		out	std_logic;
 		o_a3:		out	std_logic;
@@ -31,18 +28,18 @@ entity Stepper_PWM is
 end Stepper_PWM;
 
 architecture Behavioral of Stepper_PWM is
-	signal counter:	natural range 0 to 1000		:= 0;
+	signal counter:			std_logic_vector(9 downto 0)	:=(others => '0');
 
 begin			
 	process(i_reset, i_clk) begin
 		if ( rising_edge (i_clk) ) then
 			if ( i_reset = '1' ) then
-				counter <= 0;			
+				counter <= (others => '0');
 			else
-				if (counter = 999) then
-					counter <= 0;
+				if (unsigned(counter) = 999) then
+					counter <= (others => '0');
 				else
-					counter <= counter + 1;
+					counter <= std_logic_vector(unsigned(counter) + 1);
 				end if;
 			end if;		
 		end if;
